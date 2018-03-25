@@ -41,3 +41,7 @@ let g:terraform_align=1
 
 "" Airline configs
 let g:airline#extensions#tabline#enabled = 1 " shows all open buffers if only one tab
+
+
+"" Editor config customization
+let g:EditorConfig_max_line_indicator = "line"
