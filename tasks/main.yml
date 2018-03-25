@@ -1,0 +1,32 @@
+---
+- name: "get editor config"
+  become: "yes"
+  apt:
+    name: "editorconfig"
+
+- name: "place $HOME/.vimrc"
+  copy:
+    src: "_HOME_.vimrc"
+    dest: "~/.vimrc"
+
+- name: "place /.editorconfig"
+  become: "yes"
+  copy:
+    src: "_.editorconfig"
+    dest: "/.editorconfig"
+    mode: "0744"
+    owner: "{{ ansible_user_id }}"
+
+- name: "fetch editorconfig vim plugin"
+  git:
+    repo: "https://github.com/editorconfig/editorconfig-vim.git"
+    dest: "~/.vim/bundle/editorconfig-vim"
+    depth: 1
+    update: "no"
+
+- name: "fetch airline vim plugin"
+  git:
+    repo: "https://github.com/vim-airline/vim-airline.git"
+    dest: "~/.vim/bundle/vim-airline"
+    depth: 1
+    update: "no"
