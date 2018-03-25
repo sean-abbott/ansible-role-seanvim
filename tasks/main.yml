@@ -30,3 +30,10 @@
     dest: "~/.vim/bundle/vim-airline"
     depth: 1
     update: "no"
+
+- name: "fetch ansible-vim plugin"
+  git:
+    repo: "https://github.com/pearofducks/ansible-vim.git"
+    dest: "~/.vim/bundle/ansible-vim"
+    depth: 1
+    update: "no"
