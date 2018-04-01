@@ -1,39 +1,21 @@
 ---
-- name: "get editor config"
-  become: "yes"
-  apt:
-    name: "editorconfig"
-
 - name: "place $HOME/.vimrc"
   copy:
     src: "_HOME_.vimrc"
     dest: "~/.vimrc"
 
-- name: "place /.editorconfig"
-  become: "yes"
-  copy:
-    src: "_.editorconfig"
-    dest: "/.editorconfig"
-    mode: "0744"
-    owner: "{{ ansible_user_id }}"
-
-- name: "fetch editorconfig vim plugin"
+- name: "fetch vim plugins"
   git:
-    repo: "https://github.com/editorconfig/editorconfig-vim.git"
-    dest: "~/.vim/bundle/editorconfig-vim"
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
     depth: 1
     update: "no"
-
-- name: "fetch airline vim plugin"
-  git:
-    repo: "https://github.com/vim-airline/vim-airline.git"
-    dest: "~/.vim/bundle/vim-airline"
-    depth: 1
-    update: "no"
-
-- name: "fetch ansible-vim plugin"
-  git:
-    repo: "https://github.com/pearofducks/ansible-vim.git"
-    dest: "~/.vim/bundle/ansible-vim"
-    depth: 1
-    update: "no"
+  with_items:
+    - repo: "https://github.com/vim-airline/vim-airline.git"
+      dest: "~/.vim/bundle/vim-airline"
+    - repo: "https://github.com/pearofducks/ansible-vim.git"
+      dest: "~/.vim/bundle/ansible-vim"
+    - repo: "https://github.com/fatih/vim-hclfmt.git"
+      dest: "~/.vim/bundle/vim-hclfmt"
+    - repo: "https://github.com/hashivim/vim-terraform.git"
+      dest: "~/.vim/bundle/vim-terraform"
